@@ -2,7 +2,7 @@ import sqlite3
 import os
 
 # Usiamo lo stesso percorso definito nel vostro ETL
-DB_PATH = 'data/data_warehouse.db'
+DB_PATH = 'data_warehouse.db'
 
 def esegui_creazione_e_analisi():
     print("--- 1. Connessione al Database e Creazione delle Viste per Power BI ---")
