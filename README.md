@@ -1,85 +1,87 @@
-# Project-Work---L-31--Inglese-Luca
-# 📊 Data Warehouse & Business Intelligence: Project Work
+# Data Warehouse & Business Intelligence: Project Work
 ### Monitoraggio Operativo dei KPI di Servizio (Ticket e Commesse)
-**Sviluppato da:** Luca Inglese 
+**Sviluppato da:** Luca Inglese
 
 ---
 
-## 📂 Struttura del Progetto
+## Struttura del progetto
 
-La cartella di lavoro contiene i seguenti file e script organizzati per gestire l'intero ciclo di vita del dato (dalla generazione sintetica alla dashboard finale):
+Nella cartella trovate tutto quello che serve a ricostruire il progetto dall'inizio alla fine, dalla generazione dei dati fino alla dashboard finale:
 
 ```text
-├── data/                         # Cartella per l'archiviazione di dati grezzi o temporanei
-├── analytics_queries.py          # Script SQL/Python per la creazione e la verifica delle Viste KPI
-├── Dashboard_Luca_Inglese.pbix   # Report interattivo sviluppato in Power BI Desktop
-├── data_warehouse.db             # Database relazionale locale SQLite (il nostro Data Warehouse)
-├── etl.py                        # Pipeline ETL (Extract, Transform, Load) per la modellazione dei dati
-├── generator.py                  # Generatore di dati simulati (Clienti, Operatori, Richieste, ecc.)
-└── requirements.txt              # Elenco delle dipendenze Python necessarie per riprodurre il progetto
----
-
-## 🛠️ Architettura Tecnica e Scelte Metodologiche
-
-### 1. Schema a Stella (Star Schema)
-Il Data Warehouse è modellato seguendo i principi di dimensionalità per garantire massime prestazioni di query ed estrema facilità di utilizzo in Power BI:
-*   **Tabella dei Fatti (`fact_richieste`)**: Contiene le misure quantitative transazionali (minuti di erogazione, importo fatturato) e le chiavi esterne.
-*   **Tabelle Dimensionali**: 
-    *   `dim_clienti`: Anagrafica dei clienti con area geografica e livello di tiering.
-    *   `dim_operatori`: Staff tecnico interno suddiviso per team di competenza.
-    *   `dim_fornitori`: Terze parti di supporto logistico/tecnologico.
-    *   `dim_tempo`: Calendario dettagliato per consentire analisi temporali dinamiche.
-
-### 2. Spostamento del Calcolo sul Database (Database Pushdown)
-Per non appesantire Power BI con formule DAX complesse, tutti i KPI principali sono stati calcolati direttamente a livello di database tramite **Viste (VIEW) SQL**. Power BI si limita a leggere i risultati aggregati, garantendo un caricamento quasi istantaneo del report.
+├── data/                         # dati grezzi o temporanei
+├── analytics_queries.py          # script per creare e verificare le viste KPI
+├── Dashboard_Luca_Inglese.pbix   # report Power BI
+├── data_warehouse.db             # database SQLite (il Data Warehouse vero e proprio)
+├── etl.py                        # pipeline ETL per la modellazione dei dati
+├── generator.py                  # generatore di dati simulati (clienti, operatori, richieste...)
+└── requirements.txt              # dipendenze Python per riprodurre il progetto
+```
 
 ---
 
-## 📈 Viste SQL Separate (KPI)
+## Come è stato costruito
 
-Nel database sono configurate le seguenti viste analitiche, caricate come tabelle separate nel report:
+### Schema a stella
 
-1.  **`view_kpi_totale_richieste`**: Calcola il volume complessivo dei ticket gestiti.
-2.  **`view_kpi_incasso_totale`**: Calcola i ricavi totali generati esclusivamente dalle commesse completate con successo.
-3.  **`view_kpi_tempo_medio`**: Calcola il tempo medio di erogazione (in minuti) escludendo i ticket non completati o con anomalie.
-4.  **`view_kpi_fidelizzazione`**: Identifica la percentuale di clienti ricorrenti (più di una richiesta effettuata nel tempo).
+Ho modellato il Data Warehouse seguendo lo schema a stella, che resta il modo più semplice per avere query veloci e un collegamento pulito con Power BI:
 
----
+- **`fact_richieste`** — la tabella dei fatti, con le misure quantitative (minuti di erogazione, importo fatturato) e le chiavi esterne verso le dimensioni.
+- **Dimensioni:**
+  - `dim_clienti` — anagrafica clienti, area geografica, livello di tiering
+  - `dim_operatori` — staff tecnico interno, diviso per team
+  - `dim_fornitori` — terze parti per supporto logistico/tecnologico
+  - `dim_tempo` — calendario per le analisi temporali
 
-## 🚀 Come Riprodurre il Progetto
+### Calcolo spostato sul database
 
-### Requisiti Preliminari
-*   **Python 3.x**
-*   Libreria **Pandas** (`pip install pandas`)
-*   **Power BI Desktop** (per la visualizzazione della dashboard)
-
-### Istruzioni per l'Esecuzione
-
-1.  **Inizializza il Database e popola le Tabelle Fisiche:**
-    Esegui lo script ETL per creare il file del database e generare i dati di test.
-    ```bash
-    python src/etl_popolamento.py
-    ```
-
-2.  **Genera le Viste SQL dei KPI:**
-    Esegui lo script per configurare le viste analitiche separate all'interno di SQLite.
-    ```bash
-    python src/crea_viste_separate.py
-    ```
-
-3.  **Carica i dati in Power BI:**
-    *   Apri Power BI Desktop.
-    *   Seleziona **Recupera dati** > **Altro...** > **Script Python**.
-    *   Incolla il codice presente in `script_caricamento_pbi.py` (assicurati di aggiornare il percorso assoluto alla cartella del database `.db`).
-    *   Seleziona tutte le tabelle (`fact`, `dim` e le 4 viste `kpi`) e clicca su **Carica**.
-
-4.  **Collega le relazioni a stella:**
-    Nel pannello relazioni di Power BI, connetti le tabelle dimensionali alla tabella dei fatti `fact_richieste` tramite i rispettivi ID (relazioni 1-a-molti). Le tabelle KPI restano isolate per popolare le singole Schede visive.
+Invece di caricare Power BI di formule DAX complesse, ho spostato il calcolo dei KPI principali direttamente sul database, tramite viste SQL. In questo modo Power BI legge solo i risultati già aggregati e il report si carica quasi all'istante.
 
 ---
 
-## 🔮 Sviluppi Futuri e Miglioramenti
-*   **Integrazione Dati Reali**: Sostituzione dello script di simulazione con un connettore diretto (API o ODBC) verso database transazionali reali.
-*   **Gestione Storico (SCD Tipo 2)**: Tracciamento delle modifiche anagrafiche per non falsare le analisi temporali passate in caso di aggiornamenti (es. cambio di reparto di un operatore).
-*   **Aggiornamento Incrementale**: Configurazione del refresh incrementale in Power BI per caricare solo i nuovi dati giornalieri.
-*   **Pipeline di Data Quality**: Implementazione di script di test per bloccare in ingresso record anomali o corrotti (es. importi negativi).
+## Le viste KPI
+
+Sono quattro, ognuna caricata come tabella a sé nel report:
+
+1. **`view_kpi_totale_richieste`** — volume complessivo dei ticket gestiti
+2. **`view_kpi_incasso_totale`** — ricavi generati dalle commesse concluse con successo
+3. **`view_kpi_tempo_medio`** — tempo medio di erogazione (minuti), al netto dei ticket incompleti o con anomalie
+4. **`view_kpi_fidelizzazione`** — percentuale di clienti che hanno fatto più di una richiesta
+
+---
+
+## Come riprodurlo
+
+**Serve:**
+- Python 3.x
+- Pandas (`pip install pandas`)
+- Power BI Desktop, per vedere la dashboard
+
+**Passaggi:**
+
+1. Inizializza il database e popola le tabelle:
+   ```bash
+   python src/etl_popolamento.py
+   ```
+
+2. Genera le viste SQL dei KPI:
+   ```bash
+   python src/crea_viste_separate.py
+   ```
+
+3. Carica i dati in Power BI:
+   - Apri Power BI Desktop
+   - Vai su **Recupera dati** > **Altro...** > **Script Python**
+   - Incolla il codice di `script_caricamento_pbi.py` (occhio ad aggiornare il percorso assoluto del file `.db`)
+   - Seleziona tutte le tabelle (`fact`, `dim` e le 4 viste `kpi`) e clicca su **Carica**
+
+4. Collega le relazioni a stella: nel pannello relazioni di Power BI, collega le dimensioni a `fact_richieste` tramite i rispettivi ID (relazioni 1-a-molti). Le tabelle KPI restano isolate, servono solo ad alimentare le singole schede visive.
+
+---
+
+## Cosa manca ancora / possibili sviluppi
+
+- **Dati reali** al posto di quelli simulati, tramite un connettore diretto (API o ODBC) verso i database transazionali veri
+- **Storico delle anagrafiche (SCD Tipo 2)**, per non falsare le analisi passate quando cambia qualcosa (es. un operatore cambia reparto)
+- **Refresh incrementale** in Power BI, per caricare solo i dati nuovi ogni giorno
+- **Controlli di data quality**, per bloccare in ingresso record anomali (es. importi negativi)
