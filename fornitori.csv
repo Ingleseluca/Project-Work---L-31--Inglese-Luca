@@ -1,0 +1,51 @@
+fornitore_id,nome,categoria_servizio,zona_operativa
+FOR_001,Beta Express #1,Manutenzione Casa,Sud
+FOR_002,EasyHome #2,Pulizie Domestiche,Nord-Ovest
+FOR_003,EcoClean #3,Pulizie Domestiche,Centro
+FOR_004,Apex Taskers #4,Pulizie Domestiche,Nord-Ovest
+FOR_005,EcoClean #5,Assistenza Personale,Nord-Ovest
+FOR_006,Alpha Servizi #6,Consegne Rapide,Isole
+FOR_007,Apex Taskers #7,Consegne Rapide,Sud
+FOR_008,FastDelivery #8,Consegne Rapide,Nord-Est
+FOR_009,EasyHome #9,Assistenza Personale,Sud
+FOR_010,Beta Express #10,Consegne Rapide,Sud
+FOR_011,Alpha Servizi #11,Assistenza Personale,Nord-Ovest
+FOR_012,EasyHome #12,Pulizie Domestiche,Sud
+FOR_013,FastDelivery #13,Manutenzione Casa,Centro
+FOR_014,EasyHome #14,Consegne Rapide,Nord-Ovest
+FOR_015,FastDelivery #15,Consegne Rapide,Centro
+FOR_016,FastDelivery #16,Pulizie Domestiche,Nord-Est
+FOR_017,EcoClean #17,Manutenzione Casa,Nord-Ovest
+FOR_018,ProntoIntervento #18,Assistenza Personale,Nord-Est
+FOR_019,Alpha Servizi #19,Manutenzione Casa,Nord-Ovest
+FOR_020,EasyHome #20,Pulizie Domestiche,Isole
+FOR_021,Delta Repair #21,Pulizie Domestiche,Sud
+FOR_022,Alpha Servizi #22,Manutenzione Casa,Isole
+FOR_023,ProntoIntervento #23,Assistenza Personale,Nord-Est
+FOR_024,Alpha Servizi #24,Assistenza Personale,Sud
+FOR_025,Gamma Cleaning #25,Consegne Rapide,Nord-Ovest
+FOR_026,Delta Repair #26,Assistenza Personale,Sud
+FOR_027,ProntoIntervento #27,Manutenzione Casa,Centro
+FOR_028,EcoClean #28,Pulizie Domestiche,Sud
+FOR_029,EasyHome #29,Consegne Rapide,Centro
+FOR_030,SgombraTutto #30,Consegne Rapide,Sud
+FOR_031,ProntoIntervento #31,Pulizie Domestiche,Centro
+FOR_032,Beta Express #32,Assistenza Personale,Nord-Est
+FOR_033,EasyHome #33,Pulizie Domestiche,Isole
+FOR_034,ProntoIntervento #34,Assistenza Personale,Nord-Ovest
+FOR_035,Gamma Cleaning #35,Pulizie Domestiche,Sud
+FOR_036,SgombraTutto #36,Manutenzione Casa,Isole
+FOR_037,Gamma Cleaning #37,Assistenza Personale,Nord-Ovest
+FOR_038,SgombraTutto #38,Manutenzione Casa,Nord-Ovest
+FOR_039,Beta Express #39,Consegne Rapide,Centro
+FOR_040,EasyHome #40,Pulizie Domestiche,Nord-Est
+FOR_041,EcoClean #41,Consegne Rapide,Nord-Est
+FOR_042,Gamma Cleaning #42,Consegne Rapide,Isole
+FOR_043,Gamma Cleaning #43,Consegne Rapide,Nord-Est
+FOR_044,FastDelivery #44,Consegne Rapide,Sud
+FOR_045,SgombraTutto #45,Pulizie Domestiche,Nord-Est
+FOR_046,Apex Taskers #46,Consegne Rapide,Isole
+FOR_047,EasyHome #47,Pulizie Domestiche,Nord-Est
+FOR_048,SgombraTutto #48,Pulizie Domestiche,Sud
+FOR_049,FastDelivery #49,Manutenzione Casa,Centro
+FOR_050,Alpha Servizi #50,Assistenza Personale,Isole
