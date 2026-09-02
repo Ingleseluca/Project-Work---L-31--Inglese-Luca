@@ -14,7 +14,7 @@ def run_etl():
     print("Estrazione dati dai file CSV...")
     if not all(os.path.exists(f) for f in [CSV_CLIENTI, CSV_FORNITORI, CSV_OPERATORI, CSV_RICHIESTE]):
         raise FileNotFoundError("Uno o più file CSV mancano nella cartella 'data'. Esegui prima il generatore di dati!")
-        
+
     df_cli = pd.read_csv(CSV_CLIENTI)
     df_for = pd.read_csv(CSV_FORNITORI)
     df_ope = pd.read_csv(CSV_OPERATORI)
